@@ -1,8 +1,9 @@
-<html xmlns:padding-bottom="http://www.w3.org/1999/xhtml" xmlns:padding-left="http://www.w3.org/1999/xhtml">
+<!DOCTYPE html>
+<html xmlns:th="http://thymeleaf.org">
 <head>
+
     <title>MyCodeBlog</title>
     <!--Css-->
-
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
 </head>
 
@@ -23,9 +24,17 @@
             </ol>
         </nav>
 
-        <div class="card shadow-sm bg-white rounded" style="margin-top: 20px;">
+        <div class="card shadow-sm bg-white rounded" style="margin-top: 20px;" th:each="post : ${posts}">
             <div class="card-body">
-                Teste card!!!!
+                <p class="card-subtitle mb-2 text-muted" style="font-size: 0.8rem;">
+                    <span th:text="${post.autor}"></span>
+                    <span th:text="${post.data}"></span>
+                </p>
+
+                <a href="#"><h4 class="card-title" style="font-weight: bold; color: black; padding-top: 5px;"><span th:text ="${post.titulo}"></span></h4> </a>
+
+                <p class="card-text"><span th:utext="${#strings.abbreviate(post.texto,400)} "></span></p>
+
             </div>
         </div>
     </div>
