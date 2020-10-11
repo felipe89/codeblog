@@ -29,7 +29,6 @@ public class CodeblogController {
         mv.addObject("posts", posts);
         return mv;
     }
-
     @RequestMapping(value = "/posts/{id}", method = RequestMethod.GET)
     public ModelAndView getPostDetails(@PathVariable("id") long id){
         ModelAndView mv = new ModelAndView("postDetails");
@@ -37,15 +36,14 @@ public class CodeblogController {
         mv.addObject("post", post);
         return mv;
     }
-
     @RequestMapping(value = "/newpost", method = RequestMethod.GET)
     public String getPostForm() {
         return "postForm";
     }
-
     @RequestMapping(value = "/newpost", method = RequestMethod.POST)
     public String savePost(@Valid Post post, BindingResult result, RedirectAttributes attributes){
         if(result.hasErrors()){
+            attributes.addFlashAttribute("mensagem", "Verifique que todos os campos obrigatórios foram preenchido!");
             return "redirect:/newpost";
         }
         post.setData(LocalDate.now());
